@@ -8,6 +8,7 @@ class LoginView extends StatelessWidget {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
+    bool underLine = false;
     return MaterialApp(
       home: Scaffold(
         body: Column(
@@ -118,8 +119,18 @@ class LoginView extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(
-                  padding: EdgeInsets.only(top: 60),
+              Padding(
+                padding: EdgeInsets.only(top: 60),
+                child: GestureDetector(
+                  onTap: () {
+                    underLine = true;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterView()
+                        )
+                    );
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -127,6 +138,7 @@ class LoginView extends StatelessWidget {
                         AppText.noAccount,
                         style: TextStyle(
                           color: AppColors.primaryColor,
+                          decoration: (underLine) ? TextDecoration.underline : null,
                           fontSize: 15
                         ),
                       ),
@@ -136,12 +148,14 @@ class LoginView extends StatelessWidget {
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w700,
+                          decoration: (underLine) ? TextDecoration.underline : null,
                           fontSize: 15
                         ),
                       ),
                     ],
-                  )
-                ),
+                  ),
+                )
+              ),
             ],
           )
         ),

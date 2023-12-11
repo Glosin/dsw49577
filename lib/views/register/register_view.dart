@@ -1,3 +1,4 @@
+import 'package:dsw49577/views/login/login_view.dart';
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
 import '../../utils/text.dart';
@@ -12,18 +13,48 @@ class RegisterView extends StatelessWidget {
       home: Scaffold(
         body: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 62),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top:10, left: 12),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginView()
+                            )
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset('assets/images/arrow.png'),
+                          const SizedBox(width: 5),
+                          const Text(
+                            AppText.back,
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Image.asset('assets/images/background.png')
+                  ),
+                ],
               ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(top: 21, left: 19),
                   child: Text(
-                    AppText.signIn,
+                    AppText.signUp,
                     style: TextStyle(
                       color: AppColors.primaryColor,
                       fontWeight: FontWeight.w700,
@@ -38,8 +69,19 @@ class RegisterView extends StatelessWidget {
                 child: SizedBox(
                   height: 50,
                   child: AppInput(
-                      labelText: AppText.inputUsername,
+                      labelText: AppText.inputUsernameRegister,
                       iconPath: 'assets/images/person.png',
+                      isObscure: false
+                  )
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 46, left: 21, right: 19),
+                child: SizedBox(
+                  height: 50,
+                  child: AppInput(
+                      labelText: AppText.inputEmail,
+                      iconPath: 'assets/images/email.png',
                       isObscure: false
                   )
                 ),
@@ -55,22 +97,19 @@ class RegisterView extends StatelessWidget {
                   )
                 ),
               ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40, right: 19),
-                  child: Text(
-                    AppText.forgotPassword,
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15
-                    ),
-                  ),
+              const Padding(
+                padding: EdgeInsets.only(top: 40, left: 21, right: 19),
+                child: SizedBox(
+                  height: 50,
+                  child: AppInput(
+                      labelText: AppText.inputPassword,
+                      iconPath: 'assets/images/lock.png',
+                      isObscure: true
+                  )
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 40, left: 19, right: 19),
+                padding: EdgeInsets.only(top: 80, left: 19, right: 19),
                 child: ElevatedButton(
                   onPressed: null,
                   style: ButtonStyle(
@@ -92,19 +131,15 @@ class RegisterView extends StatelessWidget {
                   )
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 75),
-                child: Text(
-                  AppText.otherMethods,
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15
-                  ),
-                ),
-              ),
-              const Padding(
-                  padding: EdgeInsets.only(top: 60),
+              Padding(
+                padding: EdgeInsets.only(top: 140),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginView())
+                    );
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -117,7 +152,7 @@ class RegisterView extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        AppText.signUp,
+                        AppText.signIn,
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w700,
@@ -125,8 +160,9 @@ class RegisterView extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
-                ),
+                  ),
+                )
+              ),
             ],
           )
         ),
