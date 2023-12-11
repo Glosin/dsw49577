@@ -13,15 +13,15 @@ class LoginView extends StatelessWidget {
         body: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 62),
                 child: Image.asset(
                   'assets/images/logo.png',
                 ),
               ),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 19, top: 21),
+                  padding: EdgeInsets.only(top: 21, left: 19),
                   child: Text(
                     AppText.signIn,
                     style: TextStyle(
@@ -33,7 +33,7 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 46, left: 21, right: 19),
                 child: SizedBox(
                   height: 50,
@@ -44,7 +44,7 @@ class LoginView extends StatelessWidget {
                   )
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 40, left: 21, right: 19),
                 child: SizedBox(
                   height: 50,
@@ -55,7 +55,7 @@ class LoginView extends StatelessWidget {
                   )
                 ),
               ),
-              Align(
+              const Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
                   padding: EdgeInsets.only(top: 40, right: 19),
@@ -73,14 +73,6 @@ class LoginView extends StatelessWidget {
                 padding: EdgeInsets.only(top: 40, left: 19, right: 19),
                 child: ElevatedButton(
                   onPressed: null,
-                  child: Text(
-                    AppText.logIn,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15
-                    ),
-                  ),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(AppColors.buttonColor),
                     minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
@@ -89,10 +81,18 @@ class LoginView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
+                  ),
+                  child: const Text(
+                    AppText.logIn,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15
+                    ),
                   )
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 75),
                 child: Text(
                   AppText.otherMethods,
@@ -103,7 +103,7 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +117,31 @@ class LoginView extends StatelessWidget {
                     MyButtons(image: 'assets/images/linkedin.png'),
                   ],
                 ),
-              )
+              ),
+              const Padding(
+                  padding: EdgeInsets.only(top: 60),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppText.noAccount,
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 15
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        AppText.signUp,
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15
+                        ),
+                      ),
+                    ],
+                  )
+                ),
             ],
           )
         ),
@@ -135,26 +159,25 @@ class MyButtons extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: null,
-      child: Image.asset(image),
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        elevation: 4, // Set the elevation for the button
-        shadowColor: Colors.black, // Set the color of the box shadow
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0), // Set the button border radius
+    return GestureDetector(
+      onTap: () {
+        print('zxc');
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(2.0, 2.0),
+              blurRadius: 4.0,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15)
         ),
-        // backgroundColor: MaterialStateProperty.all(Colors.white),
-        // minimumSize: MaterialStateProperty.all(Size(50, 50)),
-        // shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        //   RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(15.0),
-        //   ),
-        // ),
-        // shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.25)),
-        // elevation: MaterialStateProperty.all<double>(0.0),
-        // overlayColor: MaterialStateProperty.all<Color>(Colors.transparent)
+        child: Image.asset(image),
       ),
     );
   }
