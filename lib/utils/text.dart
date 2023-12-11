@@ -8,9 +8,13 @@ class AppText {
   static const String inputPasswordRepeat = 'Confirm Password';
   static const String inputEmail = 'Email';
   static const String forgotPassword = 'Forget Password ?';
-  static const String logIn = 'Sign in';
   static const String otherMethods = 'Or sign in With';
   static const String noAccount = 'Don’t have account ?';
   static const String signUp = 'Sign Up';
   static const String back = 'Back';
+  static const String validEmptyError = 'Pole nie może być puste';
+  static const String validWrongDataTitle = 'Błędne hasło';
+  static const String validWrongDataDesc = 'Wprowadź poprawne dane aby się zalogować';
+  static const String validWrongDataButton = 'Rozumiem';
+  static const String validWrongEmail = 'Podaj poprawny Email';
 }

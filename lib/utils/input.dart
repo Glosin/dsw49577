@@ -6,13 +6,16 @@ class AppInput extends StatefulWidget {
   final String labelText;
   final String iconPath;
   final bool isObscure;
+  final TextEditingController controller;
 
   const AppInput({
       Key? key,
       required this.labelText,
       required this.iconPath,
-      required this.isObscure
+      required this.isObscure,
+      required this.controller
   }) : super(key: key);
+
 
   @override
   State<AppInput> createState() => _AppInputState();
@@ -23,9 +26,11 @@ class _AppInputState extends State<AppInput> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      obscureText: this.widget.isObscure ? !isVisible : false,
+    return TextFormField(
+      controller: widget.controller,
+      obscureText: widget.isObscure ? !isVisible : false,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.secondaryColor,
@@ -40,7 +45,7 @@ class _AppInputState extends State<AppInput> {
           ),
           borderRadius: BorderRadius.all(Radius.circular(15))
         ),
-        labelText: this.widget.labelText,
+        labelText: widget.labelText,
         labelStyle: TextStyle(
           color: Colors.black.withOpacity(0.3),
           fontWeight: FontWeight.w400,
@@ -53,12 +58,21 @@ class _AppInputState extends State<AppInput> {
             )
           ]
         ),
-        prefixIcon: Image.asset(this.widget.iconPath),
+        prefixIcon: Image.asset(widget.iconPath, height: 24, width: 24,),
         suffixIcon: widget.isObscure ? IconButton(
             onPressed: () => setState(() {
               isVisible = !isVisible;
             }), icon: Image.asset('assets/images/eye.png')) : null,
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppText.validEmptyError;
+        } else if (widget.labelText == 'Email' && !value.contains('@')) {
+          return AppText.validWrongEmail;
+        } else {
+          return null;
+        }
+      },
     );
   }
 }

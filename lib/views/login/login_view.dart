@@ -1,4 +1,5 @@
 import '../register/register_view.dart';
+import '../homepage/homepage_view.dart';
 import '../../utils/colors.dart';
 import '../../utils/text.dart';
 import '../../utils/input.dart';
@@ -8,6 +9,7 @@ class LoginView extends StatelessWidget {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
+
     bool underLine = false;
     return MaterialApp(
       home: Scaffold(
@@ -34,65 +36,7 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 46, left: 21, right: 19),
-                child: SizedBox(
-                  height: 50,
-                  child: AppInput(
-                      labelText: AppText.inputUsername,
-                      iconPath: 'assets/images/person.png',
-                      isObscure: false
-                  )
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 40, left: 21, right: 19),
-                child: SizedBox(
-                  height: 50,
-                  child: AppInput(
-                      labelText: AppText.inputPassword,
-                      iconPath: 'assets/images/lock.png',
-                      isObscure: true
-                  )
-                ),
-              ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40, right: 19),
-                  child: Text(
-                    AppText.forgotPassword,
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 40, left: 19, right: 19),
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(AppColors.buttonColor),
-                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    AppText.logIn,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15
-                    ),
-                  )
-                ),
-              ),
+              MyForm(),
               const Padding(
                 padding: EdgeInsets.only(top: 75),
                 child: Text(
@@ -163,6 +107,121 @@ class LoginView extends StatelessWidget {
   }
 }
 
+class MyForm extends StatefulWidget {
+  const MyForm({super.key});
+  @override
+  _MyFormState createState() => _MyFormState();
+}
+
+class _MyFormState  extends State<MyForm>{
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController _username = TextEditingController();
+    TextEditingController _password = TextEditingController();
+    String login = 'dsw49577';
+    String haslo = '1234';
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 46, left: 21, right: 19),
+            child: SizedBox(
+              height: 90,
+              child: AppInput(
+                labelText: AppText.inputUsername,
+                iconPath: 'assets/images/person.png',
+                isObscure: false,
+                controller: _username
+              )
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 21, right: 19),
+            child: SizedBox(
+              height: 90,
+              child: AppInput(
+                labelText: AppText.inputPassword,
+                iconPath: 'assets/images/lock.png',
+                isObscure: true,
+                controller: _password
+              )
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: EdgeInsets.only(right: 19),
+              child: Text(
+                AppText.forgotPassword,
+                style: TextStyle(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 40, left: 19, right: 19),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  if (_username.text == login && _password.text == haslo) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePageView()
+                        )
+                    );
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(AppText.validWrongDataTitle),
+                            content: Text(AppText.validWrongDataDesc),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(AppText.validWrongDataButton)
+                              )
+                            ],
+                          );
+                        }
+                    );
+                  }
+                }
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColors.buttonColor),
+                minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+              ),
+              child: const Text(
+                AppText.signIn,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15
+                ),
+              )
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MyButtons extends StatelessWidget {
   final image;
   
@@ -174,9 +233,6 @@ class MyButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print('zxc');
-      },
       child: Container(
         width: 50,
         height: 50,
