@@ -13,8 +13,9 @@ class AppText {
   static const String signUp = 'Sign Up';
   static const String back = 'Back';
   static const String validEmptyError = 'Pole nie może być puste';
-  static const String validWrongDataTitle = 'Błędne hasło';
+  static const String validWrongDataTitle = 'Błąd';
   static const String validWrongDataDesc = 'Wprowadź poprawne dane aby się zalogować';
   static const String validWrongDataButton = 'Rozumiem';
   static const String validWrongEmail = 'Podaj poprawny Email';
+  static const String validWrongPasswordDesc = 'Hasła muszą się zgadzać';
 }

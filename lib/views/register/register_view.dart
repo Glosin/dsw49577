@@ -176,12 +176,32 @@ class _MyRegisterFormState  extends State<MyRegisterForm>{
             child: ElevatedButton(
               onPressed: () {
                 if (_RegisterformKey.currentState!.validate()) {
+                  if (_password.text == _repeatPassword.text) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => LoginView()
                         )
                     );
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(AppText.validWrongDataTitle),
+                            content: Text(AppText.validWrongPasswordDesc),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(AppText.validWrongDataButton)
+                              )
+                            ],
+                          );
+                        }
+                    );
+                  }
                 }
               },
               style: ButtonStyle(
